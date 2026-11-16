@@ -207,4 +207,24 @@ inspected. Two legibility defects were found and fixed, then re-shot:
   1.5 MiB); dossier text 69,130 bytes (cap 160 KiB — all source fits
   whole); screenshots 4 × 1280×720 JPEG, 43–87 KB each (caps 4 files /
   256 KiB / long side ≤ 1280 / short side ≥ 480).
-## 5. Kit check (TO BE FILLED)
+## 5. Kit check
+
+Run from the kit dir (`best-game-01-kit-v2`, re-download verified
+byte-identical to the previous kit — no newer level):
+`node cli/makefun.mjs check --repo ~/workspace/makefun/best-game-entry-v2 --commit 73b79ab`
+— **4 passed, 1 failed, 14 skipped, 5 checked at submission.**
+- Passed: `competition_open` (now is between 2026-11-15T18:00:00Z and
+  the 2026-11-18T18:00:00Z deadline), `snapshot` (25 files, 402,734
+  bytes, within the intake caps), `license_osi` (SPDX MIT), `entrypoint`
+  (main.ts selects node22).
+- Failed: `transcripts_present` only — no transcripts were passed to
+  this check run. That is the main agent's submit-time step (bundle the
+  builder sessions with their usage rows), not a defect in the entry;
+  the transcript-gate checks all skip without a bundle to read.
+- At submission (main agent's steps): `repo_public`,
+  `repo_created_after_open`, `commit_in_repo`, `duplicate_snapshot`;
+  `repo_owner` is covered by the committed `.makefun/owner.json`
+  (wallet 9C4wZiUSQZcBBaNsJBuMvyadxejZ3QtgJFTKrpoTgxRc).
+- Note: the check's `prerequisites` skip is the standard one (Node ≥
+  22.18 — this VM runs 24.22.1; desktop browser — Falkon headless was
+  used for the screenshots).
